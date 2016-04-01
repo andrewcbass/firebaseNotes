@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="/bower_components/angular/angular.min.js" charset="utf-8"></script>
+    <script src="/bower_components/firebase/firebase.js" charset="utf-8"></script>
+    <script src="/bower_components/angularfire/dist/angularfire.js" charset="utf-8"></script>
+    <script src="/javascripts/main.js" charset="utf-8"></script>
+  </head>
+  <body ng-app="fireApp" ng-controller="mainCtrl">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <div ng-hide="authData">
+      Register / Login!
+      <div>
+        <input type="text" ng-model="newUser.email" placeholder="email">
+        <input type="password" ng-model="newUser.password" placeholder="email">
+        <button ng-click="register(newUser)">Register</button>
+        <button ng-click="login(newUser)">Login</button>
+      </div>
+
+    </div>
+    <div ng-show="authData">
+      <button ng-click="logout()">Logout!</button>
+
+      <label>Name: </label>
+      <input type="text" ng-model="profile.name" ng-change="profile.$save()">
+      <label>Fav Color: </label>
+      <input type="color" ng-model="profile.color" ng-change="profile.$save()">
+    </div>
+
+
+    <ul id="tweets">
+      <li ng-repeat="tweet in tweets | reverse">
+      {{tweet.screen_name}} - {{tweet.text}}
+      </li>
+    </ul>
+
+
+<!-- for jQuery -->
+    <!-- <ul id="tweets">
+      <li id="template">
+        <span class="screename"></span> - <span class="text"></span>
+      </li>
+    </ul> -->
+  </body>
+</html>
